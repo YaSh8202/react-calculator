@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 function App() {
-  const [calc, setCalc] = useState("");
-  const [result, setResult] = useState("");
+  const [calc, setCalc] = useState("0");
+  const [result, setResult] = useState("0");
 
   const ops = ["+", "-", "*", "/", "."];
 
@@ -10,9 +10,9 @@ function App() {
     if (value === "0" && (calc === "" || calc === "0")) return;
     if (value === "." && calc.includes(".")) return;
 
-    if (ops.includes(value) && calc === "") {
-      return;
-    }
+    // if (ops.includes(value) && calc === "") {
+    //   return;
+    // }
 
     if (
       ops.includes(value) &&
@@ -23,8 +23,13 @@ function App() {
       setCalc(v);
       return;
     }
+    if(!ops.includes(value) && calc==="0"){
+      setCalc(value);
+      return;
+    }
 
     setCalc(calc + value);
+
 
     if (!ops.includes(value)) {
       setResult(eval(calc + value).toString());
@@ -73,8 +78,8 @@ function App() {
   };
 
   const clearCalc = () => {
-    setCalc("");
-    setResult("");
+    setCalc("0");
+    setResult("0");
   };
 
   return (
